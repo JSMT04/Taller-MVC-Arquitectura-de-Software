@@ -33,12 +33,19 @@ public interface IVistaParqueadero {
     String pedirPlaca();
 
     /**
-     * Solicita al usuario el tipo de vehículo.
+     * Solicita al usuario el tipo de vehículo (nombre exacto del Diagrama UML y PDF).
      *
      * @return {@link TipoVehiculo#CARRO} o {@link TipoVehiculo#MOTO},
      *         o {@code null} si la selección fue inválida
      */
-    TipoVehiculo pedirTipoVehiculo();
+    TipoVehiculo pedirTipo();
+
+    /**
+     * Alias de pedirTipo() para compatibilidad.
+     */
+    default TipoVehiculo pedirTipoVehiculo() {
+        return pedirTipo();
+    }
 
     /**
      * Muestra un mensaje informativo al usuario.

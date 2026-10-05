@@ -145,7 +145,7 @@ public class VistaSwing implements IVistaParqueadero {
     }
 
     @Override
-    public TipoVehiculo pedirTipoVehiculo() {
+    public TipoVehiculo pedirTipo() {
         JComboBox<TipoVehiculo> combo = new JComboBox<>(TipoVehiculo.values());
         combo.setFont(new Font("Segoe UI", Font.PLAIN, 16));
         int result = JOptionPane.showConfirmDialog(frame, combo,
@@ -155,6 +155,11 @@ public class VistaSwing implements IVistaParqueadero {
             return (TipoVehiculo) combo.getSelectedItem();
         }
         return null;
+    }
+
+    @Override
+    public TipoVehiculo pedirTipoVehiculo() {
+        return pedirTipo();
     }
 
     @Override

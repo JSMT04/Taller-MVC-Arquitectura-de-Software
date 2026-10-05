@@ -49,7 +49,7 @@ public class VistaConsola implements IVistaParqueadero {
     }
 
     @Override
-    public TipoVehiculo pedirTipoVehiculo() {
+    public TipoVehiculo pedirTipo() {
         System.out.println("Tipo de vehiculo:");
         System.out.println("  1. Carro");
         System.out.println("  2. Moto");
@@ -60,6 +60,11 @@ public class VistaConsola implements IVistaParqueadero {
             case "2" -> TipoVehiculo.MOTO;
             default  -> null;
         };
+    }
+
+    @Override
+    public TipoVehiculo pedirTipoVehiculo() {
+        return pedirTipo();
     }
 
     @Override

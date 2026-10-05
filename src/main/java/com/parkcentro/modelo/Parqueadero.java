@@ -116,6 +116,13 @@ public class Parqueadero {
     }
 
     /**
+     * Alias coincidente con el nombre de método del Diagrama UML.
+     */
+    public synchronized int consultarCuposDisponibles(TipoVehiculo tipo) {
+        return getCuposDisponibles(tipo);
+    }
+
+    /**
      * Cantidad de vehículos actualmente dentro para un tipo.
      */
     public synchronized int getOcupados(TipoVehiculo tipo) {
@@ -129,6 +136,13 @@ public class Parqueadero {
      */
     public synchronized List<Registro> getVehiculosActivos() {
         return Collections.unmodifiableList(new ArrayList<>(vehiculosActivos.values()));
+    }
+
+    /**
+     * Alias coincidente con el nombre de método del Diagrama UML.
+     */
+    public synchronized List<Registro> getVehiculosDentro() {
+        return getVehiculosActivos();
     }
 
     /**
@@ -150,5 +164,55 @@ public class Parqueadero {
      */
     public synchronized int getTotalVehiculosAtendidos() {
         return historial.size();
+    }
+
+    /**
+     * Genera un reporte detallado de cierre del día con el número de vehículos atendidos
+     * y el total recaudado, separado por tipo de vehículo (cumplimiento exacto de RF6 y Diagrama UML).
+     *
+     * @return texto formateado del reporte de cierre
+     */
+    public synchronized String generarReporte() {
+        long carrosAtendidos = historial.stream()
+                .filter(r -> r.getVehiculo().getTipo() == TipoVehiculo.CARRO)
+                .count();
+        double ingresosCarros = historial.stream()
+                .filter(r -> r.getVehiculo().getTipo() == TipoVehiculo.CARRO)
+                .mapToDouble(Registro::getValorPagado)
+                .sum();
+
+        long motosAtendidas = historial.stream()
+                .filter(r -> r.getVehiculo().getTipo() == TipoVehiculo.MOTO)
+                .count();
+        double ingresosMotos = historial.stream()
+                .filter(r -> r.getVehiculo().getTipo() == TipoVehiculo.MOTO)
+                .mapToDouble(Registro::getValorPagado)
+                .sum();
+
+        int totalAtendidos = historial.size();
+        double ingresosTotales = ingresosCarros + ingresosMotos;
+
+        return String.format(
+            "====================================================\n" +
+            "       REPORTE DE CIERRE - PARQUEADERO PARKCENTRO   \n" +
+            "====================================================\n" +
+            "  CARROS:\n" +
+            "    - Atendidos (salidas): %d\n" +
+            "    - Total recaudado:     $%,.0f\n" +
+            "    - Actualmente dentro:  %d\n" +
+            "----------------------------------------------------\n" +
+            "  MOTOS:\n" +
+            "    - Atendidas (salidas): %d\n" +
+            "    - Total recaudado:     $%,.0f\n" +
+            "    - Actualmente dentro:  %d\n" +
+            "====================================================\n" +
+            "  TOTALES GENERALES:\n" +
+            "    - Total vehiculos atendidos: %d\n" +
+            "    - Total dinero recaudado:    $%,.0f\n" +
+            "====================================================",
+            carrosAtendidos, ingresosCarros, getOcupados(TipoVehiculo.CARRO),
+            motosAtendidas, ingresosMotos, getOcupados(TipoVehiculo.MOTO),
+            totalAtendidos, ingresosTotales
+        );
     }
 }

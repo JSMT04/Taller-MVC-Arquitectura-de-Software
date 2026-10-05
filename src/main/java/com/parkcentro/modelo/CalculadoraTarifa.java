@@ -45,4 +45,19 @@ public class CalculadoraTarifa {
         // Tope máximo diario
         return Math.min(total, tipo.getTopeMaximoDiario());
     }
+
+    /**
+     * Sobrecarga estática para calcular la tarifa a partir de un objeto Registro.
+     * Coincide exactamente con el método especificado en el diagrama UML.
+     *
+     * @param registro   el registro del vehículo
+     * @param horaSalida fecha y hora de salida
+     * @return valor a pagar
+     */
+    public static double calcularTarifa(Registro registro, LocalDateTime horaSalida) {
+        CalculadoraTarifa calc = new CalculadoraTarifa();
+        return calc.calcular(registro.getVehiculo().getTipo(),
+                             registro.getHoraEntrada(),
+                             horaSalida);
+    }
 }

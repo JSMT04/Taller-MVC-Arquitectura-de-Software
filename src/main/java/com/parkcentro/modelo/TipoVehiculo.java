@@ -30,6 +30,7 @@ public enum TipoVehiculo {
     public int getCapacidadMaxima()  { return capacidadMaxima;  }
     public int getTarifaPorMinuto()  { return tarifaPorMinuto;  }
     public int getTopeMaximoDiario() { return topeMaximoDiario; }
+    public int getTopeDiario()       { return topeMaximoDiario; }
     public Pattern getPatronPlaca()  { return patronPlaca;      }
 
     /**

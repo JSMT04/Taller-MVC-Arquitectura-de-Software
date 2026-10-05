@@ -49,6 +49,13 @@ public class Registro {
         this.activo      = false;
     }
 
+    /**
+     * Alias de cerrar() coincidente con el nombre de método del Diagrama UML.
+     */
+    public void registrarSalida(LocalDateTime horaSalida, double valorPagado) {
+        cerrar(horaSalida, valorPagado);
+    }
+
     // ── Getters ──────────────────────────────────────────────────────────
 
     public Vehiculo getVehiculo()         { return vehiculo;    }

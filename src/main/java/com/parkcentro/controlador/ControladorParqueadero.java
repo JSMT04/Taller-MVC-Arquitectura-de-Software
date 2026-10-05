@@ -65,7 +65,7 @@ public class ControladorParqueadero {
                 vista.mostrarError("No se ingreso una placa.");
                 return;
             }
-            TipoVehiculo tipo = vista.pedirTipoVehiculo();
+            TipoVehiculo tipo = vista.pedirTipo();
             if (tipo == null) {
                 vista.mostrarError("Tipo de vehiculo no valido.");
                 return;
@@ -120,13 +120,10 @@ public class ControladorParqueadero {
     }
 
     /**
-     * Genera y muestra un reporte resumen del parqueadero.
+     * Genera y muestra el reporte de cierre detallado por tipo de vehículo (cumple RF6 y Diagrama UML).
      */
     public void generarReporte() {
-        vista.mostrarReporte(
-                parqueadero.getTotalVehiculosAtendidos(),
-                parqueadero.getIngresosTotales(),
-                parqueadero.getOcupados(TipoVehiculo.CARRO),
-                parqueadero.getOcupados(TipoVehiculo.MOTO));
+        String reporte = parqueadero.generarReporte();
+        vista.mostrarMensaje(reporte);
     }
 }
