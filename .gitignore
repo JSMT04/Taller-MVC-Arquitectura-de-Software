@@ -1,0 +1,17 @@
+# Directorios de compilación
+build/
+bin/
+out/
+target/
+
+# IDEs y editores
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+
+# Sistema operativo
+Thumbs.db
+.DS_Store
